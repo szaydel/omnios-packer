@@ -1,3 +1,7 @@
+echo "Creating vagrant user"
+useradd -m -k /etc/skel/ -b /export/home -s /usr/bin/bash vagrant
+passwd -N vagrant
+
 echo "Installing VirtualBox Guest Additions"
 echo "mail=\ninstance=overwrite\npartial=quit" > /tmp/noask.admin
 echo "runlevel=nocheck\nidepend=quit\nrdepend=quit" >> /tmp/noask.admin
