@@ -16,12 +16,9 @@ lofiadm -d $VBGADEV
 rm -f VBoxGuestAdditions.iso
 
 echo "Adding Vagrant user to sudoers"
-echo "vagrant ALL=(ALL) ALL" > /etc/sudoers.d/vagrant
-chmod 0440 /etc/sudoers.d/vagrant
-
-echo "Setting sudo to keep SSH_AUTH_SOCK by default"
-echo 'Defaults env_keep += "SSH_AUTH_SOCK"' > /etc/sudoers.d/keep_ssh_agent
-chmod 0440 /etc/sudoers.d/keep_ssh_agent
+echo "vagrant ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+echo 'Defaults env_keep += "SSH_AUTH_SOCK"' >> /etc/sudoers
+chmod 0440 /etc/sudoers
 
 # add paths and other options to vagrant user's shell
 echo "Setting Vagrant user's and root's environment"
