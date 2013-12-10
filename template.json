@@ -7,6 +7,12 @@
       ]
     }
   ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox",
