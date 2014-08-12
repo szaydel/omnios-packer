@@ -45,15 +45,6 @@ curl -sL http://github.com/mitchellh/vagrant/raw/master/keys/vagrant.pub > \
 chmod 600 /export/home/vagrant/.ssh/authorized_keys
 chown vagrant:root /export/home/vagrant/.ssh/authorized_keys
 
-# formally add omniti-ms publisher
-echo "Adding omniti-ms publisher"
-pkg set-publisher -g http://pkg.omniti.com/omniti-ms/ ms.omniti.com
-
-# install chef from omniti-ms repository, and symlink for easier use
-#echo "Installing Chef Solo from OmniTI MS Repository"
-#pkg install -g http://pkg.omniti.com/omniti-ms/ omniti/system/management/chef
-#ln -s /opt/omni/lib/ruby/gems/1.9/bin/chef-solo /opt/omni/bin/chef-solo
-
 # remove root login from sshd
 echo "Removing root login over SSH"
 sed -i -e "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
@@ -67,4 +58,4 @@ sed -i -e 's/^timeout.*$/timeout 5/' -e "/^title omniosvar/,`wc -l /rpool/boot/g
 echo "Resetting resolv.conf"
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
-echo "Post-install done"
+echo "postinstall.sh done"
