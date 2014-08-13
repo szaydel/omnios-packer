@@ -28,9 +28,10 @@ to do so for any reason (critical fixes to a previously published basebox).
 
 In addition to the templates for baseboxes intended for public consumption,
 this repository contains templates for largely internal-only use baseboxes.
-This exist as separate templates because some of our internal projects have
+These exist as separate templates because some of our internal projects have
 additional configuration requirements that aren't appropriate or useful for
-public users of OmniOS (e.g. data pools).
+public users of OmniOS (e.g. data pools, slightly higher default memory
+allocations, etc.).
 
 These templates may not be updated for every release of OmniOS, as they are
 typically only built on an as-needed basis.
@@ -40,10 +41,10 @@ They are located in the appropriate `templates/<project>/` subdirectories.
 ### Notes
 
 In addition to the configurations used by the default/public templates, the
-project specific templates provide the following:
+project specific templates generally provide the following extras:
 
  * Additional virtual disk attached to VM
- * A second ZFS pootl (data) created using entire disk
+ * A second ZFS pool (data) created using entire disk
  * VM memory increased to 2048MB
  * The omniti-perl publisher is added by default
 
