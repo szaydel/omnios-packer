@@ -15,7 +15,7 @@
     {
       "type": "vagrant",
       "compression_level": 9,
-      "output": "boxes/{{.BuildName}}-{{.Provider}}.box"
+      "output": "boxes/{{.BuildName}}.box"
     }
   ],
   "builders": [
