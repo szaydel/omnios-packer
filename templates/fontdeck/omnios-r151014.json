@@ -1,0 +1,75 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/postinstall.sh",
+        "scripts/data-pool.sh",
+        "scripts/zfs-omnios-vagrant.sh",
+        "scripts/publisher-omniti-ms.sh",
+        "scripts/publisher-omniti-perl.sh",
+        "scripts/chef-solo.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "output": "boxes/{{.BuildName}}.box"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "name": "fontdeck-omnios-r151014",
+      "guest_os_type": "OpenSolaris_64",
+      "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151014.iso",
+      "iso_checksum": "796fbfe1305f0e4922e9cf627d3e67c2",
+      "iso_checksum_type": "md5",
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "shutdown_command": "/usr/sbin/shutdown -g 0 -y -i 5",
+      "boot_wait": "30s",
+      "disk_size": 40960,
+      "ssh_port": 22,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"],
+        ["storagectl", "{{.Name}}", "--name", "SATA Controller", "--add", "sata"],
+        ["createhd", "--filename", "{{.Name}}-data-pool.vdi", "--size", "40960"],
+        ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--type", "hdd", "--medium", "{{.Name}}-data-pool.vdi", "--port", "0", "--device", "0"]
+      ],
+      "boot_command": [
+        "<enter><wait10><wait10><wait10>",
+        "1<enter><wait10>",
+        "<wait10>",
+        "<f2><wait>",
+        "<f2><wait>",
+        "<f2><wait>",
+        "<bs><bs><bs><bs><bs><bs><bs>omnios-vagrant",
+        "<f2><wait>",
+        "<f2><wait>",
+        "<f2><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<f8><wait>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "root<enter><wait><enter><wait5>",
+        "passwd<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "ipadm create-if e1000g0<enter><wait5>",
+        "ipadm create-addr -T dhcp e1000g0/v4<enter><wait5>",
+        "echo 'nameserver 8.8.8.8' > /etc/resolv.conf<enter><wait>",
+        "cp /etc/nsswitch.dns /etc/nsswitch.conf<enter><wait>",
+        "sed -i -e 's/PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config<enter><wait>",
+        "svcadm restart ssh<enter><wait>"
+      ]
+    }
+  ]
+}
