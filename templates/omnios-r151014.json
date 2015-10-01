@@ -21,7 +21,7 @@
       "name": "omnios-r151014",
       "guest_os_type": "OpenSolaris_64",
       "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151014.iso",
-      "iso_checksum": "796fbfe1305f0e4922e9cf627d3e67c2",
+      "iso_checksum": "7e50479eaa70004d2d47fc1b7eadc330",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
       "ssh_password": "vagrant",
