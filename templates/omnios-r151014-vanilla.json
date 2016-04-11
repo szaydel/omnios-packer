@@ -20,7 +20,7 @@
       "type": "virtualbox-iso",
       "name": "omnios-r151014-vbox",
       "guest_os_type": "OpenSolaris_64",
-      "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151014.iso",
+      "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151014-Feb04.iso",
       "iso_checksum": "b50dc6273b799b1bd1ae21cc72d4c04f",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
