@@ -24,6 +24,16 @@ to do so for any reason (critical fixes to a previously published basebox).
  * The omniti-ms publisher is added by default
  * The VM is set to have 1024MB of RAM and a 40GB drive
 
+### VMWare
+
+There is a known issue with Caiman (the text based installer used by OmniOS
+from ISO media) and VMWare Fusion. The installer will fail if there is no
+rdiskette0 device present in the virtual machine. To workaround this problem,
+the Builder configuration for VMWare boxes includes the "floppy\_files"
+setting, which references this file, causing Fusion to attach a floppy device
+to the VM before booting. We don't actually care what the contents of the
+device are, it simply has to be present.
+
 ## Internal OmniTI Baseboxes
 
 In addition to the templates for baseboxes intended for public consumption,
