@@ -5,7 +5,6 @@
       "scripts": [
         "scripts/postinstall.sh",
         "scripts/publisher-omniti-ms.sh",
-        "scripts/guest-additions.sh",
         "scripts/rsync.sh"
       ]
     }
@@ -20,10 +19,10 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "name": "omnios-r151006_066",
+      "name": "omnios-r151006_088",
       "guest_os_type": "OpenSolaris_64",
-      "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151006_066.iso",
-      "iso_checksum": "400496c3ea3f18926f32a5cd5ee0cde9",
+      "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151006_088.iso",
+      "iso_checksum": "365a14517846c35d9bbc36cdcdb99255",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
       "ssh_password": "vagrant",
