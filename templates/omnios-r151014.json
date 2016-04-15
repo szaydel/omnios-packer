@@ -4,7 +4,8 @@
       "type": "shell",
       "scripts": [
         "scripts/postinstall.sh",
-        "scripts/publisher-omniti-ms.sh"
+        "scripts/publisher-omniti-ms.sh",
+        "scripts/rsync.sh"
       ]
     }
   ],

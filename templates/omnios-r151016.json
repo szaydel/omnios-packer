@@ -4,8 +4,8 @@
       "type": "shell",
       "scripts": [
         "scripts/postinstall.sh",
-        "scripts/guest-additions.sh",
-        "scripts/publisher-omniti-ms.sh"
+        "scripts/publisher-omniti-ms.sh",
+        "scripts/rsync.sh"
       ]
     }
   ],
@@ -22,7 +22,7 @@
       "name": "omnios-r151016-vbox",
       "guest_os_type": "OpenSolaris_64",
       "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151016.iso",
-      "iso_checksum": "e136e43e5b81d205e8e32f8d5699f715",
+      "iso_checksum": "aba21913a455cb7a8598e3a4c9fc0745",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
       "ssh_password": "vagrant",
