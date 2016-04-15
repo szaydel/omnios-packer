@@ -3,7 +3,7 @@ useradd -m -k /etc/skel/ -b /export/home -s /usr/bin/bash vagrant
 passwd -N vagrant
 
 echo "Adding Vagrant user to sudoers"
-echo "vagrant ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 echo 'Defaults env_keep += "SSH_AUTH_SOCK"' >> /etc/sudoers
 chmod 0440 /etc/sudoers
 
