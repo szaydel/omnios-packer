@@ -4,8 +4,11 @@
       "type": "shell",
       "scripts": [
         "scripts/postinstall.sh",
+        "scripts/data-pool.sh",
+        "scripts/zfs-omnios-vagrant.sh",
         "scripts/publisher-omniti-ms.sh",
-        "scripts/rsync.sh"
+        "scripts/rsync.sh",
+        "scripts/pkg-update.sh"
       ]
     }
   ],
@@ -22,7 +25,7 @@
       "name": "omnios-r151018-vbox",
       "guest_os_type": "OpenSolaris_64",
       "iso_url": "http://omnios.omniti.com/media/OmniOS_Text_r151018.iso",
-      "iso_checksum": "972932cb620a602aa4c6c803fef241cf",
+      "iso_checksum": "99ad9319f6620a8243b42fc1aa03cb54",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
       "ssh_password": "vagrant",
@@ -32,7 +35,10 @@
       "ssh_port": 22,
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "1024"],
-        ["modifyvm", "{{.Name}}", "--cpus", "1"]
+        ["modifyvm", "{{.Name}}", "--cpus", "1"],
+        ["storagectl", "{{.Name}}", "--name", "SATA Controller", "--add", "sata"],
+        ["createhd", "--filename", "{{.Name}}-data-pool.vdi", "--size", "40960"],
+        ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--type", "hdd", "--medium", "{{.Name}}-data-pool.vdi", "--port", "0", "--device", "0"]
       ],
       "boot_command": [
         "<enter><wait10><wait10><wait10>",
