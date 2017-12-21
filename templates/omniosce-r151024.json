@@ -24,7 +24,7 @@
       "type": "virtualbox-iso",
       "name": "omnios-r151024-vbox",
       "guest_os_type": "OpenSolaris_64",
-      "iso_url": "file:///Volumes/hybrid1T/ISOs/Desktops/Omnios/omniosce-r151024.iso",
+      "iso_url": "https://downloads.omniosce.org/media/stable/omniosce-r151024.iso",
       "iso_checksum": "6a4bfaa8036799e3006c85268bf7f674",
       "iso_checksum_type": "md5",
       "ssh_username": "root",
