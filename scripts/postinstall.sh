@@ -1,3 +1,9 @@
+echo "Creating ZFS filesystem 'rpool/export'"
+zfs create -omountpoint=/export -p rpool/export
+
+echo "Creating ZFS filesystem 'rpool/export/home'"
+zfs create rpool/export/home
+
 echo "Creating vagrant user"
 useradd -m -k /etc/skel/ -b /export/home -s /usr/bin/bash vagrant
 passwd -N vagrant

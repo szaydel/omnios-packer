@@ -1,0 +1,72 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/postinstall.sh",
+        "scripts/data-pool.sh",
+        "scripts/zfs-omnios-vagrant.sh",
+        "scripts/publisher-omniti-ms.sh",
+        "scripts/rsync.sh",
+        "scripts/pkg-update.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "output": "boxes/{{.BuildName}}-{{isotime \"20060102\"}}.box"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "name": "omnios-r151024-vbox",
+      "guest_os_type": "OpenSolaris_64",
+      "iso_url": "file:///Volumes/hybrid1T/ISOs/Desktops/Omnios/omniosce-r151024.iso",
+      "iso_checksum": "6a4bfaa8036799e3006c85268bf7f674",
+      "iso_checksum_type": "md5",
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "shutdown_command": "/usr/sbin/shutdown -g 0 -y -i 5",
+      "boot_wait": "30s",
+      "disk_size": 40960,
+      "ssh_port": 22,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
+        ["modifyvm", "{{.Name}}", "--cpus", "1"],
+        ["storagectl", "{{.Name}}", "--name", "SATA Controller", "--add", "sata"],
+        ["createhd", "--filename", "{{.Name}}-data-pool.vdi", "--size", "40960"],
+        ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--type", "hdd", "--medium", "{{.Name}}-data-pool.vdi", "--port", "0", "--device", "0"]
+      ],
+      "boot_command": [
+        "<enter>",
+        "<enter>",
+        "1<enter>",
+        "0<enter>",
+        "<enter><wait>",
+        "omniosce-vagrant",
+        "<enter><wait><enter>",
+        "2<enter>",
+        "49<enter>",
+        "21<enter>",
+        "1<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<enter>1<enter>1<enter>2<enter>5<enter>",
+        "localhost.localdomain<enter>",
+        "6<enter>",
+        "8.8.8.8<enter><enter>3<enter>",
+        "vagrant<enter>vagrant<enter><enter>",
+        "4<enter>",
+        "<enter>",
+        "2<enter>",
+        "cp /mnt/etc/nsswitch.dns /mnt/etc/nsswitch.conf<enter>",
+        "sed -i -e 's/PermitRootLogin no/PermitRootLogin yes/' /mnt/etc/ssh/sshd_config<enter>",
+        "exit<enter>",
+        "3<enter>"
+      ]
+    }
+  ]
+}
